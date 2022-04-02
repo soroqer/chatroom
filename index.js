@@ -10,22 +10,6 @@ app.get('/0x1991E121fA90c333B3F5815545462fB72Aa95651', (req, res) => {
     res.sendFile(__dirname + '/index.html');
 });
 
-app.get('/backend/blacklist', (req, res) => {
-    res.sendFile(__dirname + '/index.html');
-});
-app.get('/backend/words', (req, res) => {
-    res.sendFile(__dirname + '/index.html');
-});
-
-app.post('/backend/addBlacklist', (req, res) => {
-    res.sendFile(__dirname + '/index.html');
-});
-app.post('/backend/removeBlacklist', (req, res) => {
-    res.sendFile(__dirname + '/index.html');
-});
-app.post('/backend/addWords', (req, res) => {
-    res.sendFile(__dirname + '/index.html');
-});
 
 // connection auth (check blacklist and mark)
 io.use((socket,next) => {
@@ -39,13 +23,8 @@ io.use((socket,next) => {
 io.on('connection', (socket) => {
 
 
-    console.log("connected");
-
-
     socket.on('chat message', msg => {
-        console.log('chat message',msg.sender,msg.content);
 
-        console.log("black",socket.black);
         if (socket.black == true) {
             socket.emit('system message', {'code':1,'content':'Can not speak, because of blacklist'});
             return

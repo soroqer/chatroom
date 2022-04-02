@@ -22,7 +22,7 @@ socket.on('chat message', function(msg) {
 
 // 接收系统提示
 socket.on('system message', function(msg) {
-    let code = msg.code;        // code, 2: 发言频繁，发送失败
+    let code = msg.code;        // code, 1：黑名单；2：发言频繁，发送失败； 3：敏感词汇
     let content = msg.content;  // 文字说明
 });    
 
