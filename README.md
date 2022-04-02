@@ -5,7 +5,11 @@
 # 1 接口数据格式
 
 ```ecmascript 6
-var socket = io();
+const socket = io("ws://localhost:8585",{
+    auth: {
+        address:"0x87A4..."
+    }
+});
 
 // 发送聊天信息
 socket.emit('chat message', {"sender":"0x87A4...","content":"发言内容..."});
