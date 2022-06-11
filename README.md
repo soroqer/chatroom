@@ -5,11 +5,15 @@
 # 1 接口数据格式
 
 ```ecmascript 6
+// 连接后默认加入 default 聊天室
 const socket = io("ws://localhost:8585",{
     auth: {
         address:"0x87A4..."
     }
 });
+
+// 切换聊天室
+socket.emit('join room', {"sender":"0x98A3...","room":"代币合约地址"});
 
 // 发送聊天信息
 socket.emit('chat message', {"sender":"0x87A4...","content":"发言内容..."});

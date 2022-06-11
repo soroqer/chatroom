@@ -19,9 +19,21 @@ io.use((socket,next) => {
     next();
 });
 
+
+
 // connection
 io.on('connection', (socket) => {
 
+    socket.join('default')
+
+    let rooms = Array.from(socket.rooms)
+    socket.leave(rooms[0])
+
+    socket.on('join room',msg => {
+        let rooms = Array.from(socket.rooms)
+        socket.leave(rooms[0])
+        socket.join(msg.room)
+    })
 
     socket.on('chat message', msg => {
 
@@ -44,7 +56,10 @@ io.on('connection', (socket) => {
         }
 
         socket.lastSend = dateNow;
-        io.emit('chat message', msg);
+        let rooms = Array.from(socket.rooms)
+        msg.room = rooms[0];
+        msg.sender = socket.handshake.auth.address;
+        io.in(msg.room).emit('chat message', msg);
     });
 });
 
