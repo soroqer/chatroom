@@ -1,10 +1,6 @@
 const mysql      = require('mysql');
-const connection = mysql.createConnection({
-    host     : 'localhost',
-    user     : 'me',
-    password : 'secret',
-    database : 'my_db'
-});
+const config = require('config')
+const connection = mysql.createConnection(config.get('sql'));
 
 connection.connect();
 
@@ -22,6 +18,9 @@ function Sql() {
 
     }
     this.removeBlacklist = function (address) {
+
+    }
+    this.insertChat = function (msg) {
 
     }
 }
